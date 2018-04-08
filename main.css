@@ -1,0 +1,439 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:ExtraBold,Light');
+
+.HyperSwipe {
+  background-color: #0f0124;
+}
+
+.Heading{
+	margin: 0 auto;
+	width: 345px;
+	height: 66px;
+	background-image: linear-gradient(92deg, #bd7bff, #3232fe);
+	font-family: Nunito;
+	font-size: 48px;
+	font-weight: 800;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: 1px;
+	text-align: center;
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	text-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+.Heading .text-style-1 {
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-image: linear-gradient(92deg, #bd7bff, #3232fe);
+}
+
+.Heading-2 {
+	margin: 0 auto;
+	padding-top: 30px;
+	width: 287px;
+	height: 19px;
+	font-family: Georgia;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: 10px;
+	text-align: center;
+	color: #00ffff;
+	text-shadow: 0 22px 44px rgba(0, 0, 0, 0.5);
+}
+
+.container{
+	text-align:center;
+}
+
+.Introtext {
+	margin: 0 auto;
+	width: 460px;
+	height: 72px;
+	font-family: Nunito;
+	font-size: 18px;
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #00ffff;
+}
+
+
+
+.Mask {
+	float: left;
+    position: absolute;
+    left: 50%;
+    margin-left: -150px;
+	margin-top:93px;
+	width: 300px;
+	height: 400px;
+	border-radius: 10px;
+	background-color: #00ffff;
+	box-shadow: 0 22px 44px 0 #000000;
+	transition: 0.1s;
+	z-index:10;
+}
+
+.SecondMask {
+	float: left;
+	position: absolute;
+	left: 50%;
+	margin-left: -135px;
+	margin-top:83.3px;
+	width: 270px;
+	height: 359px;
+	border-radius: 10px;
+	background-color: #00ffff;
+	box-shadow: 0 22px 44px 0 #000000;
+	transition:0.1s;
+	z-index:5;
+}
+
+.ThirdMask {
+	position: absolute;
+	left: 50%;
+	margin-left: -120px;
+	margin-top:73.3px;
+	float: left;
+	width: 240px;
+	height: 319.2px;
+	border-radius: 10px;
+	background-color: #00ffff;
+	box-shadow: 0 22px 44px 0 #000000;
+	transition:0.1s;
+	z-index:2;
+}
+
+.ThirdPicture {
+	border-radius: 10px 10px 0 0;
+	width: 240px;
+	height: 159.6px;
+	transition:0.1s
+}
+
+.SecondPicture {
+	border-radius: 10px 10px 0 0;
+	width: 270px;
+	height: 179.5px;
+	transition:0.1s
+}
+
+.MainPicture {
+	border-radius: 10px 10px 0 0;
+	width: 300px;
+	height: 200px;
+	transition:0.1s
+}
+
+.dislike-wrapper{
+	float:left;
+	width: 35%;
+	height:400px;
+	margin-top:93px;
+}
+
+.dislike-border {
+	float:left;
+	margin-top: calc((400px - 260px) / 2);
+    position: absolute;
+	left: calc(25% - 170px);
+	width: 195px;
+	height: 260px;
+	border-radius: 10px;
+	box-shadow: 0 15px 29px 0 #000000;
+	border: solid 1px transparent;
+	background-image: linear-gradient(#0f0124, #0f0124), linear-gradient(143deg, #c44aff, #9224ff);
+	background-origin: border-box;
+	background-clip: content-box, border-box;
+	display:table;
+}
+
+.dislike-overlay {
+	float:left;
+	margin-top: calc((400px - 260px) / 2 + 93px);
+    position: absolute;
+	left: calc(25% - 170px);
+	width: 195px;
+	height: 260px;
+	z-index:11;
+}
+
+.dislike-overlay:hover{
+	cursor:pointer;
+}
+
+.like-wrapper{
+	float: right;
+    width: 35%;
+    right: 0;
+    height: 400px;
+    margin-top: 93px;
+}
+
+.like-border {
+	float:left;
+	margin-top: calc((400px - 260px) / 2);
+    position: absolute;
+	right: calc(25% - 170px);
+	width: 195px;
+	height: 260px;
+	border-radius: 10px;
+	box-shadow: 0 15px 29px 0 #000000;
+	border: solid 1px transparent;
+	background-image: linear-gradient(#0f0124, #0f0124), linear-gradient(143deg, #c44aff, #9224ff);
+	background-origin: border-box;
+	background-clip: content-box, border-box;
+	display:table;
+}
+
+.like-overlay{
+	float:left;
+	margin-top: calc((400px - 260px) / 2 + 93px);
+    position: absolute;
+	right: calc(25% - 170px);
+	width: 195px;
+	height: 260px;
+	border-radius: 10px;
+	z-index:11;
+}
+
+.like-overlay:hover{
+	cursor:pointer;
+}
+
+.LIKE {
+ display:table-cell;
+ vertical-align:middle;
+  width: 80px;
+  height: 49px;
+  background-image: linear-gradient(97deg, #10b3fe, #1ce6fa);
+  font-family: Nunito;
+  font-size: 36px;
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  text-align: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 22px 44px rgba(0, 0, 0, 0.5);
+}
+.LIKE .text-style-1 {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(97deg, #10b3fe, #1ce6fa);
+}
+
+.DISLIKE {
+	display:table-cell;
+	vertical-align:middle;
+	width: 144px;
+	height: 49px;
+	background-image: linear-gradient(94deg, #10b3fe, #1ce6fa);
+	font-family: Nunito;
+	font-size: 36px;
+	font-weight: 800;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: 0.8px;
+	text-align: center;
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	text-shadow: 0 22px 44px rgba(0, 0, 0, 0.5);
+}
+.DISLIKE .text-style-1 {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(94deg, #10b3fe, #1ce6fa);
+}
+
+.card-heading {
+	text-transform: uppercase;
+	padding-top:5px;
+	margin:0 auto;
+	width: 260px;
+	height: 38px;
+	font-family: Nunito;
+	font-size: 28px;
+	font-weight: 800;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: 0.6px;
+	text-align: center;
+	color: #0f0124;
+}
+
+.card-text {
+	padding-top:38px;
+	margin:0 auto;
+	width: 260px;
+	height: 72px;
+	font-family: Nunito;
+	font-size: 18px;
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: 0.4px;
+	text-align: center;
+	color: #0f0124;
+}
+
+.testPic{
+	border-radius: 10px 10px 0 0;
+	width: 195px;
+	height: 130px;
+	transition:0.3s;
+}
+
+.test{
+	width: 195px;
+	height: 260px;
+	float:left;
+	margin-top: calc((400px - 260px) / 2 + 93px);
+    position: absolute;
+	z-index:10;
+	border-radius: 10px;
+	background-color: #00ffff;
+	box-shadow: 0 22px 44px 0 #000000;
+	transition:0.3s;
+}
+
+.card-heading-small {
+	text-transform: uppercase;
+	padding-top:5px;
+	margin:0 auto;
+	width: 195px;
+	height: 38px;
+	font-family: Nunito;
+	font-size: 14px;
+	font-weight: 800;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: 0.6px;
+	text-align: center;
+	color: #0f0124;
+	transition:0.3s;
+}
+
+.card-text-small {
+	padding-top:16px;
+	margin:0 auto;
+	width: 195px;
+	height: 72px;
+	font-family: Nunito;
+	font-size: 9px;
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: 0.4px;
+	text-align: center;
+	color: #0f0124;
+	transition:0.3s;
+}
+
+.modal {
+	display:none;
+    position: fixed; /* Stay in place */
+    z-index: 15; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background: linear-gradient(180deg, rgba(255,255,255,0) 207%, #fff),linear-gradient(75deg, #dbedff 74%, #ebfff0) no-repeat center center fixed;
+    margin: 15% auto; /* 15% from the top and centered */
+    border: none;
+	height:460px;
+    width: 100%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.next{
+	left:calc(100% + 200px);
+	position:absolute;
+	transition:0.5s;
+}
+.prev{
+	left:-200px;
+	position:absolute;
+	transition:0.5s;
+}
+
+.active{
+	transition:0.5s;
+}
+
+#prevImg{
+	float:left; 
+	margin-top: 150px; 
+	padding-left: 16px;
+	z-index:25;
+}
+#prevImg:hover{
+	cursor:pointer;
+}
+
+#nextImg{
+	float:right; 
+	margin-top: 150px;
+	z-index:25;
+}
+#nextImg:hover{
+	cursor:pointer;
+}
+
+.error{
+	color:black;
+	padding-top:180px;
+}
+
+.Reset{
+	float: left;
+    position: absolute;
+    left: 50%;
+    margin-left: -150px;
+	margin-top:250px;
+	width: 300px;
+}
+
+.Reset:hover{
+	cursor:pointer;
+}

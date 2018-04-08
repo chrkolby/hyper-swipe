@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href="./main.css">
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous">
+	</script>
+	<script
+		src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+		integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+		crossorigin="anonymous">
+	</script>
+</head>
+<body class="HyperSwipe">
+
+	<script>
+
+		var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+		// Edge 20+
+		var isEdge = !isIE && !!window.StyleMedia;
+
+		console.log(isIE, isEdge);
+		
+		$(document).ready(function(){
+		
+			var cards = [];
+			var slideCards = [];
+			var currentCard = 0;
+			var currentSlide = 0;
+			var like =  25;
+			var dislike =  25;
+			
+			$( ".Mask" ).draggable({ 
+				axis: "x",
+				containment: "body",
+				revert: "invalid",
+				scroll:false
+			});
+			
+			$(".like-wrapper, .dislike-wrapper").droppable({
+				accept: ".Mask",
+				drop: function(event, ui){	
+				
+					$(ui.draggable).addClass("test");
+					if($(this).hasClass("like-wrapper")){
+						var type = "like";
+						$(ui.draggable).css("right","calc( "+like + "% - 170px )");
+						$(ui.draggable).css("left","");
+						//$(ui.draggable).detach().appendTo(".like-border");
+						like++;
+					}
+					else{
+						var type = "dislike";
+						$(ui.draggable).css("left","calc( "+dislike + "% - 170px )");
+						//$(ui.draggable).css("top","0");
+						//$(ui.draggable).detach().appendTo(".dislike-border");
+						dislike++;
+						
+					}
+					
+					cards[currentCard].status = type;
+					
+					//$(ui.draggable).css("top","0");
+					
+					$(".Mask .card-heading").addClass("card-heading-small");
+					$(".Mask .card-heading").removeClass("card-heading");
+					
+					$(".Mask .card-text").addClass("card-text-small");
+					$(".Mask .card-text").removeClass("card-text");
+					
+					$(ui.draggable).removeClass("Mask");
+					
+					$(".MainPicture").addClass("testPic");
+					$(".MainPicture").removeClass("MainPicture");
+					
+					ui.draggable.draggable({disabled: true});
+					$(".SecondMask").addClass("Mask");
+					$(".SecondMask").removeClass("SecondMask");
+					
+					$( ".Mask" ).draggable({ 
+						axis: "x",
+						revert: "invalid",
+						scroll:false
+					});
+					
+					$(".ThirdMask").addClass("SecondMask");
+					$(".ThirdMask").removeClass("ThirdMask");
+					
+					$(".SecondPicture").addClass("MainPicture");
+					$(".SecondPicture").removeClass("SecondPicture");
+					
+					$(".ThirdPicture").addClass("SecondPicture");
+					$(".ThirdPicture").removeClass("ThirdPicture");
+					
+					currentCard++;
+					
+					if(currentCard+2 < cards.length){
+					
+						$(".cards").append('<div class="ThirdMask"><img src="' + cards[currentCard+2].image + '" class="ThirdPicture"></img><h3 class="card-heading">'+cards[currentCard+2].title+'</h3><p class="card-text">'+cards[currentCard+2].body+'</p></div>');
+					}
+					
+					var setStorage = cards.filter(function(element){
+						if(element.status != null){
+							return element;
+						}
+					});
+					
+					localStorage.setItem("hyperswipe", JSON.stringify(setStorage));
+					
+				}
+			});
+			
+			
+			$(".dislike-overlay, .like-overlay").on("click", function(){
+			
+				$(".error").remove();
+				
+				$(".modal-content .Mask").remove();
+			
+				if($(this).hasClass("like-overlay")){
+					var type = "like";
+					$("#imgHeader").text("LIKE");
+				}
+				else{
+					var type = "dislike";
+					$("#imgHeader").text("DISLIKE");
+				}
+				
+				currentSlide = 0;
+				
+				$("#prevImg").hide();
+				
+				if(!$("#nextImg").is(":visible")){
+					$("#nextImg").show();
+				}
+
+				var span = document.getElementsByClassName("close")[0];
+				
+				$("#imageModal").fadeIn(1000);
+
+				span.onclick = function() {
+					$("#imageModal").fadeOut();
+
+				}
+
+				var modal = document.getElementById('imageModal');
+				window.onclick = function(event) {
+					if (event.target == modal) {
+						$("#imageModal").fadeOut();
+					}
+				}
+				
+				slideCards = cards.filter(function(element){
+					if(element.status == type){
+						return element;
+				
+					}
+				});
+				
+				if(slideCards.length > 0){
+					
+					var currentCard = '<div style="margin-top:0px;" class="Mask active"><img src="'+slideCards[currentSlide].image+'" class="MainPicture"></img><h3 id="mainHead" class="card-heading">'+slideCards[currentSlide].title+'</h3><p id="mainText" class="card-text">'+slideCards[currentSlide].body+'</p></div>'
+					$(".modal-content").append(currentCard);
+					
+					if(slideCards[currentSlide+1]){
+						var nextCard = '<div style="margin-top:0px;" class="Mask next"><img src="'+slideCards[currentSlide+1].image+'" class="MainPicture"></img><h3 id="mainHead" class="card-heading">'+slideCards[currentSlide+1].title+'</h3><p id="mainText" class="card-text">'+slideCards[currentSlide+1].body+'</p></div>'
+						$(".modal-content").append(nextCard);
+					}
+
+					if(slideCards.length == 1){
+						$("#nextImg").hide();
+					}
+					
+					else if(!$("#nextImg").is(":visible")){
+						$("#nextImg").show();
+					}
+					
+				}
+				else{
+				
+					$("#nextImg").hide();
+					
+					$(".modal-content").append("<div class='error Heading-2' style='margin: 0 auto'>No " + type + "s</div>");
+				}
+			});
+					
+			$.getJSON( "https://hyper-swipe.herokuapp.com/cards", function( resp ) {
+				cards = resp;
+				$(".MainPicture").attr("src",cards[0].image);
+				
+				$(".SecondPicture").attr("src",cards[1].image);
+				
+				$(".ThirdPicture").attr("src",cards[2].image);
+				
+				$("#mainHead").text(cards[0].title);
+				$("#mainText").text(cards[0].body);
+				
+				$("#secondHead").text(cards[1].title);
+				$("#secondText").text(cards[1].body);
+				
+				$("#thirdHead").text(cards[2].title);
+				$("#thirdText").text(cards[2].body);
+				
+			});
+			
+			$("#nextImg").on("click", function(){
+			
+				if(!$("#prevImg").is(":visible")){
+					$("#prevImg").show();
+				}
+			
+				currentSlide++;
+				
+				$(".prev").remove();
+				
+				$(".active").toggleClass("prev");
+				$(".active").toggleClass("active");
+				$(".next").toggleClass("active");
+				$(".next").toggleClass("next");
+				
+				if(!slideCards[currentSlide+1]){
+					
+					$(this).hide();
+				}
+				else{
+					var nextCard = '<div style="margin-top:0px;" class="Mask next"><img src="'+slideCards[currentSlide+1].image+'" class="MainPicture"></img><h3 id="mainHead" class="card-heading">'+slideCards[currentSlide+1].title+'</h3><p id="mainText" class="card-text">'+slideCards[currentSlide+1].body+'</p></div>'
+					$(".modal-content").append(nextCard);
+				}
+			});
+			
+			$("#prevImg").on("click", function(){
+			
+				if(!$("#nextImg").is(":visible")){
+					$("#nextImg").show();
+				}
+			
+				currentSlide--;
+				
+				$(".next").remove();
+				
+				$(".active").toggleClass("next");
+				$(".active").toggleClass("active");
+				$(".prev").toggleClass("active");
+				$(".prev").toggleClass("prev");
+				
+				if(!slideCards[currentSlide-1]){
+					
+					$(this).hide();
+				}
+				
+				else{
+				
+					var prevCard = '<div style="margin-top:0px;" class="Mask prev"><img src="'+slideCards[currentSlide-1].image+'" class="MainPicture"></img><h3 id="mainHead" class="card-heading">'+slideCards[currentSlide-1].title+'</h3><p id="mainText" class="card-text">'+slideCards[currentSlide-1].body+'</p></div>'
+					$(".modal-content").append(prevCard);
+					
+				}
+			});
+			
+			$('.Reset').on("click", function(){
+				$(".test").each(function(){
+					$(this).remove();
+				});
+				
+				cards.forEach(function(element){
+					element.status = null;
+				});
+				
+				if(!isIE && !isEdge){
+					localStorage.setItem("hyperswipe", JSON.stringify([]));
+				}
+
+				$(".cards").append('<div class="Mask"><img class="MainPicture"></img><h3 id="mainHead" class="card-heading"></h3><p id="mainText" class="card-text"></p></div>'+
+				'<div class="SecondMask"><img class="SecondPicture"></img></img><h3 id="secondHead" class="card-heading"></h3><p id="secondText" class="card-text"></p></div>'+
+				'<div class="ThirdMask"><img class="ThirdPicture"></img><h3 id="thirdHead" class="card-heading"></h3><p id="thirdText" class="card-text"></p></div>');
+				
+				currentCard = 0;
+				like = 25;
+				dislike = 25;
+				
+				$( ".Mask" ).draggable({ 
+					axis: "x",
+					containment: "body",
+					revert: "invalid",
+					scroll:false
+				});
+				
+				$(".MainPicture").attr("src",cards[0].image);
+				
+				$(".SecondPicture").attr("src",cards[1].image);
+				
+				$(".ThirdPicture").attr("src",cards[2].image);
+				
+				$("#mainHead").text(cards[0].title);
+				$("#mainText").text(cards[0].body);
+				
+				$("#secondHead").text(cards[1].title);
+				$("#secondText").text(cards[1].body);
+				
+				$("#thirdHead").text(cards[2].title);
+				$("#thirdText").text(cards[2].body);
+			});
+		});
+	</script>
+
+	<div class="container">
+		<h2 align="center" class="Heading-2">WELCOME TO THE</h2>
+		<h1 class="Heading">HYPER SWIPE</h1>
+		<div class="Introtext">These are some things we like and maybe you like them too? Swipe your way through the stack and sort the pile into things you like and dislike.</div>
+		<div>
+			<div class="dislike-wrapper">
+				<div class="dislike-border"><p class="DISLIKE text-style-1">DISLIKE</p></div>
+			</div>
+			<div class="cards">
+				<div class="like-overlay"></div>
+				<div class="dislike-overlay"></div>
+				<div class="Mask"><img class="MainPicture"></img><h3 id="mainHead" class="card-heading"></h3><p id="mainText" class="card-text"></p></div>
+				<div class="SecondMask"><img class="SecondPicture"></img></img><h3 id="secondHead" class="card-heading"></h3><p id="secondText" class="card-text"></p></div>
+				<div class="ThirdMask"><img class="ThirdPicture"></img><h3 id="thirdHead" class="card-heading"></h3><p id="thirdText" class="card-text"></p></div>
+				<div class="Reset Heading">RESET</div>
+			</div>
+			<div class="like-wrapper">
+				<div class="like-border"><p class="LIKE text-style-1">LIKE</p></div>
+			</div>
+		</div>
+	</div>
+	<div id="imageModal" class="modal">
+
+
+	  <div class="modal-content">
+		<span class="close">&times;</span>
+		<div><b id="imgHeader" style="display:block; margin: 0 auto;" class="DISLIKE text-style-1"></b></div>
+		<div id="prevImg"><img src="./back-btn.png"></img></div>
+		<div id="nextImg"><img src="./forward-btn.png"></img></div>
+	  </div>
+
+	</div>
+</body>
+</html>
