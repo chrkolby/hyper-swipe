@@ -2,6 +2,7 @@
 
 .HyperSwipe {
   background-color: #0f0124;
+  margin: 0px;
 }
 
 .Heading{
@@ -294,14 +295,14 @@
 	color: #0f0124;
 }
 
-.testPic{
+.droppedCardPic{
 	border-radius: 10px 10px 0 0;
 	width: 195px;
 	height: 130px;
 	transition:0.3s;
 }
 
-.test{
+.droppedCard{
 	width: 195px;
 	height: 260px;
 	float:left;
@@ -436,4 +437,13 @@
 
 .Reset:hover{
 	cursor:pointer;
+}
+
+.JSOverlay{
+	position:absolute;
+	height:100%;
+	width:100%;
+	background-color:#d1d1d1;
+	z-index:100;
+	text-align:center;
 }
